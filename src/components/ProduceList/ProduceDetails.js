@@ -1,6 +1,17 @@
+import { useDispatch } from "react-redux";
+import { addProduce } from "../../Store/cart";
+import { getByDisplayValue } from "@testing-library/dom";
+
 function ProduceDetails({ produce }) {
   const cartItem = {};
 
+  const dispatch = useDispatch();
+
+  const handleClick = e => {
+    e.preventDefault();
+    dispatch(addProduce(produce.id));
+  }
+  
   return (
     <li className="produce-details">
       <span>{produce.name}</span>
@@ -11,7 +22,7 @@ function ProduceDetails({ produce }) {
           <i className={"fas fa-heart"} />
         </button>
         <button
-          className={"plus-button" + (cartItem ? " selected" : "")}
+          className={"plus-button" + (cartItem ? " selected" : "")} onClick={handleClick}
         >
           <i className="fas fa-plus" />
         </button>
